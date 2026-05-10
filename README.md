@@ -6,7 +6,7 @@
 [![markdown](https://github.com/kyryloSkyrtach/Cypress-classifier/workflows/Markdown%20Lint/badge.svg)](https://github.com/kyryloSkyrtach/Cypress-classifier/actions?query=branch%3Amain)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://license.md/licenses/mit-license/)
 
-**Automatic classification of Cypress E2E test failure causes using a Neural Network**
+Automatic classification of Cypress E2E test failure causes using a Neural Network.
 
 > Authors: Kyrylo Skyrtach, Mark Volobuiev
 
@@ -25,8 +25,8 @@ one of three categories:
 ## How It Works
 
 1. A neural network is trained on **synthetic Cypress log data** (600 samples)
-2. The trained model classifies failed tests from a **real Cypress JSON report**
-3. The developer instantly sees what kind of failure each test has — no manual log reading
+1. The trained model classifies failed tests from a **real Cypress JSON report**
+1. The developer instantly sees what kind of failure each test has — no manual log reading
 
 Synthetic data is used as a training set because real labelled Cypress logs are not
 publicly available. This is standard practice when real data requires manual labelling.
@@ -35,7 +35,7 @@ publicly available. This is standard practice when real data requires manual lab
 
 Feed-forward neural network with one hidden layer trained via backpropagation:
 
-```
+```text
 Input (6 features) -> Hidden layer / 16 neurons / ReLU -> Output (3 classes) / Softmax
 ```
 
@@ -52,13 +52,13 @@ Input (6 features) -> Hidden layer / 16 neurons / ReLU -> Output (3 classes) / S
 | 0 | `execution_time_ms` | Total test duration (ms) |
 | 1 | `failed_step_index` | Index of the step where the test failed |
 | 2 | `retry_count` | Number of automatic Cypress retries |
-| 3 | `error_code_category` | Encoded HTTP error category (0–5) |
+| 3 | `error_code_category` | Encoded HTTP error category (0-5) |
 | 4 | `dom_selector_depth` | CSS selector nesting depth |
 | 5 | `network_call_count` | Number of network calls during the test |
 
 ## Requirements
 
-- Python ≥ 3.14
+- Python >= 3.14
 - No ML libraries required
 
 ## Installation
@@ -105,7 +105,7 @@ uv run pytest
 
 ## Project Structure
 
-```
+```text
 cypress-classifier/
 ├── app/
 │   ├── neural_network.py     # NN from scratch: forward pass, backprop, SGD
@@ -148,4 +148,5 @@ cypress-classifier/
 If you discover any security-related issues, please email [ks30366@zpsb.pl](mailto:ks30366@zpsb.pl) instead of using the issue tracker.
 
 ---
+
 Copyright (c) 2026 Kyrylo Skyrtach, Mark Volobuiev
