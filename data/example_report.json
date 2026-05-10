@@ -1,0 +1,82 @@
+{
+  "stats": {
+    "suites": 2,
+    "tests": 7,
+    "passes": 4,
+    "failures": 3,
+    "pending": 0,
+    "start": "2026-05-04T10:00:00.000Z",
+    "end": "2026-05-04T10:00:45.000Z",
+    "duration": 45000
+  },
+  "results": [
+    {
+      "suite": "Login Page Tests",
+      "tests": [
+        {
+          "title": "should load login page",
+          "fullTitle": "Login Page Tests should load login page",
+          "status": "passed",
+          "duration": 1200,
+          "err": {}
+        },
+        {
+          "title": "should login with valid credentials",
+          "fullTitle": "Login Page Tests should login with valid credentials",
+          "status": "passed",
+          "duration": 1800,
+          "err": {}
+        },
+        {
+          "title": "should show error with invalid credentials",
+          "fullTitle": "Login Page Tests should show error with invalid credentials",
+          "status": "failed",
+          "duration": 2200,
+          "err": {
+            "message": "AssertionError: expected '<div.error-msg>' to contain 'Invalid password'",
+            "stack": "AssertionError: expected '<div>' to contain 'Invalid password'\n    at Context.eval (cypress/e2e/login.cy.js:45:10)\n    at processImmediate (internal/timers.js:456:21)"
+          }
+        }
+      ]
+    },
+    {
+      "suite": "Dashboard API Tests",
+      "tests": [
+        {
+          "title": "should fetch user profile",
+          "fullTitle": "Dashboard API Tests should fetch user profile",
+          "status": "passed",
+          "duration": 950,
+          "err": {}
+        },
+        {
+          "title": "should load dashboard data from API",
+          "fullTitle": "Dashboard API Tests should load dashboard data from API",
+          "status": "failed",
+          "duration": 1100,
+          "err": {
+            "message": "CypressError: cy.request() failed because the response had a status code of 503",
+            "stack": "CypressError: cy.request() failed\n    at Context.eval (cypress/e2e/dashboard.cy.js:23:5)"
+          }
+        },
+        {
+          "title": "should display chart after data loads",
+          "fullTitle": "Dashboard API Tests should display chart after data loads",
+          "status": "passed",
+          "duration": 3100,
+          "err": {}
+        },
+        {
+          "title": "should redirect to login on session timeout",
+          "fullTitle": "Dashboard API Tests should redirect to login on session timeout",
+          "status": "failed",
+          "duration": 18500,
+          "err": {
+            "message": "CypressError: Timed out retrying after 16000ms: Expected to find element: '#redirect-banner' but never found it.",
+            "stack": "CypressError: Timed out retrying after 16000ms\n    at Context.eval (cypress/e2e/dashboard.cy.js:88:12)\n    at processImmediate (internal/timers.js:456:21)"
+          }
+        }
+      ]
+    }
+  ]
+}

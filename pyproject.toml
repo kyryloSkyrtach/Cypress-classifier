@@ -1,14 +1,17 @@
 [project]
-name = "pytemp"
-description = "A simple Python package template"
+name = "cypress-classifier"
+description = "Automatic classification of Cypress test failure causes using a neural network"
 dynamic = ["version"]
 requires-python = ">=3.14"
 readme = "README.md"
-license = { file = "LICENSE.md"}
+license = "MIT"
 
 [project.urls]
 "Homepage" = "https://github.com/wnowicki/pytemp"
 "Source" = "https://github.com/wnowicki/pytemp"
+
+[tool.setuptools.packages.find]
+include = ["app*"]
 
 [tool.pytest.ini_options]
 minversion = "6.0"
@@ -19,7 +22,7 @@ testpaths = [
 pythonpath = "."
 
 [project.scripts]
-my_app = "app.main:main"
+cypress_classifier = "app.main:main"
 
 [tool.coverage.run]
 
@@ -34,32 +37,27 @@ line-length = 100
 extend-exclude = ["*.ipynb"]
 
 [tool.ruff.lint]
-# 1. Enable flake8-bugbear (`B`) rules, in addition to the defaults.
 select = [
-    "E", # All errors
-    "F", # PyFlakes
-    "B", # Bugbear
-    "Q", # Quoting
-    "I", # Isort
-    "S", # flake8-bandit
-    "N", # pep8-naming
-    "A", # flake8-builtins
-    "FAST", # FastAPI specific rules
-    "C4", # flake8-comprehensions
-    # "FIX", # Fixme
-    "LOG", # flake8-logging
-    "RET", # flake8-return
-    "SIM", # flake8-simplify
-    "C90", # mcCabe complexity
+    "E",
+    "F",
+    "B",
+    "Q",
+    "I",
+    "S",
+    "N",
+    "A",
+    "FAST",
+    "C4",
+    "LOG",
+    "RET",
+    "SIM",
+    "C90",
 ]
 
-# 2. Avoid enforcing line-length violations (`E501`)
 ignore = ["E501"]
 
-# 3. Avoid trying to fix flake8-bugbear (`B`) violations.
 unfixable = ["B"]
 
-# 4. Ignore `E402` (import violations) in all `__init__.py` files, and in selected subdirectories.
 [tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["E402", "F403"]
 "**/{tests,docs,tools}/*" = ["E402", "S101"]
