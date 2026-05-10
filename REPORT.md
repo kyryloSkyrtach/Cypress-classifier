@@ -17,8 +17,7 @@ slows down debugging.
 - **network_error** — the API returned an HTTP 4xx/5xx error or the connection failed
 - **ui_bug** — the element was found, but its value or state did not match the expectation
 
-**Practical result:** The developer points the tool at a Cypress JSON report and
-immediately sees a breakdown like:
+The developer points the tool at a Cypress JSON report and immediately sees a breakdown like:
 
 ```text
 timeout        5  (25%)
@@ -48,7 +47,7 @@ Each record simulates a failed Cypress test log with 6 numeric features:
 | `execution_time_ms` | ~15 000 ms | ~2 000 ms | ~4 000 ms |
 | `failed_step_index` | ~8 | ~3 | ~5 |
 | `retry_count` | ~3 | ~1 | ~0 |
-| `error_code_category` | 0 (no HTTP error) | 2–4 (4xx/5xx) | 0 (no HTTP error) |
+| `error_code_category` | 0 (no HTTP error) | 2-4 (4xx/5xx) | 0 (no HTTP error) |
 | `dom_selector_depth` | ~7 | ~3 | ~4 |
 | `network_call_count` | ~5 | ~12 | ~4 |
 
@@ -62,12 +61,12 @@ In addition to synthetic training data, the project includes a parser for real C
 JSON reports (cypress --reporter json format). The parser:
 
 1. Extracts all failed tests from the report
-2. Infers numeric features from error messages and stack traces:
+1. Infers numeric features from error messages and stack traces:
    - HTTP status codes via regex (`[45]\d{2}`)
    - Connection errors via keywords (`ECONNREFUSED`, `net::`)
    - DOM selector depth from CSS selectors in assertion messages
    - Step index from line numbers in stack traces
-3. Passes the feature vectors to the trained model for classification
+1. Passes the feature vectors to the trained model for classification
 
 ---
 
@@ -96,9 +95,9 @@ Input (6)  ->  Hidden (16, ReLU)  ->  Output (3, Softmax)
 |---|---|
 | Forward pass | Matrix-vector dot products, ReLU, Softmax |
 | Backward pass | Chain rule, delta propagation |
-| Weight init | He initialisation (`σ = sqrt(2/fan_in)`) |
+| Weight init | He initialisation |
 | Optimisation | Mini-batch SGD (batch=32, lr=0.05) |
-| Loss | Cross-entropy `L = -log(p_correct_class)` |
+| Loss | Cross-entropy |
 | Normalisation | Z-score (fit on train set) |
 
 ---
@@ -154,14 +153,14 @@ The example report (`data/example_report.json`, 3 failed tests) was classified c
 ## 5. Conclusions
 
 1. The neural network achieves **100% accuracy** on the synthetic test set (120/120).
-2. The Cypress JSON report parser correctly classifies all three failure types
+1. The Cypress JSON report parser correctly classifies all three failure types
    in a real-format report using heuristic feature extraction from error messages.
-3. Perfect accuracy on synthetic data is expected — the features were designed to
+1. Perfect accuracy on synthetic data is expected — the features were designed to
    clearly separate the three classes. In a real setting with noisier data,
    accuracy would be lower.
-4. In a production setting, the parser could be extended with actual Cypress
+1. In a production setting, the parser could be extended with actual Cypress
    plugin data (retry counts, real network call logs) for even higher accuracy.
-5. Implementing backpropagation from scratch demonstrated deep understanding of
+1. Implementing backpropagation from scratch demonstrated deep understanding of
    gradient-based learning without relying on ML library black-boxes.
 
 ### Possible improvements
@@ -174,8 +173,6 @@ The example report (`data/example_report.json`, 3 failed tests) was classified c
 ---
 
 ## 6. Division of Work
-
-## Division of Work
 
 ### Kyrylo Skyrtach
 
